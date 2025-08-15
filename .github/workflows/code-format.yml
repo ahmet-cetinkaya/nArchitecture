@@ -1,0 +1,120 @@
+name: Code Format
+
+on:
+  workflow_run:
+    workflows: [".NET Test"]
+    types:
+      - completed
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install CSharpier
+        run: dotnet tool install -g csharpier
+
+      - name: Install Roslynator
+        run: dotnet tool install -g roslynator.dotnet.cli
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Run Roslynator Fix
+        run: |
+          echo "Running Roslynator fix..."
+          dotnet roslynator fix \
+            --solution src/NArchitecture.Starter/NArchitecture.Starter.slnx \
+            --msbuild-path $(which msbuild) \
+            --verbosity minimal
+
+      - name: Format C# files with CSharpier
+        run: |
+          echo "Formatting C# files..."
+          dotnet csharpier . --check || {
+            echo "C# files need formatting, applying changes..."
+            dotnet csharpier format .
+          }
+
+      - name: Format other files with Prettier
+        run: |
+          echo "Formatting other files with Prettier..."
+          bunx prettier --write "**/*.{json,yml,yaml,md}" \
+            --ignore-path .gitignore \
+            --ignore-unknown || true
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Files have been formatted:"
+            git status --porcelain
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No formatting changes detected."
+          fi
+
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git add .
+          git commit -m "style: auto-format code
+
+          - Run Roslynator fix
+          - Format C# files using csharpier
+          - Format other files using prettier
+          - Triggered after successful .NET Test workflow"
+
+          # Push changes with retry logic
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            if git push; then
+              echo "Successfully pushed changes on attempt $attempt"
+              break
+            else
+              echo "Push failed on attempt $attempt"
+              if [ $attempt -eq $max_attempts ]; then
+                echo "Failed to push after $max_attempts attempts"
+                exit 1
+              fi
+              echo "Retrying in 5 seconds..."
+              sleep 5
+              git pull --rebase
+              attempt=$((attempt + 1))
+            fi
+          done
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.verify-changed-files.outputs.changed }}" == "true" ]; then
+            echo "✅ Code formatting completed and changes committed."
+          else
+            echo "✅ Code formatting completed - no changes needed."
+          fi

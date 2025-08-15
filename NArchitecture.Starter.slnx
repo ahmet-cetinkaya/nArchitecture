@@ -1,0 +1,26 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/NArchitecture.Starter/" />
+  <Folder Name="/src/NArchitecture.Starter/core/">
+    <Project Path="src/NArchitecture.Starter/core/Application/NArchitecture.Starter.Application.csproj" />
+    <Project Path="src/NArchitecture.Starter/core/Domain/NArchitecture.Starter.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/NArchitecture.Starter/infrastructure/">
+    <Project Path="src/NArchitecture.Starter/infrastructure/Persistence/NArchitecture.Starter.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/src/NArchitecture.Starter/presentation/">
+    <Project Path="src/NArchitecture.Starter/presentation/WebApi/NArchitecture.Starter.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/tests/NArchitecture.Starter/" />
+  <Folder Name="/tests/NArchitecture.Starter/core/">
+    <Project Path="tests/NArchitecture.Starter/core/Application.Tests/NArchitecture.Starter.Application.Tests.csproj" />
+    <Project Path="tests/NArchitecture.Starter/core/Domain.Tests/NArchitecture.Starter.Domain.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tests/NArchitecture.Starter/infrastructure/">
+    <Project Path="tests/NArchitecture.Starter/infrastructure/Persistence.Tests/NArchitecture.Starter.Persistence.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tests/NArchitecture.Starter/presentation/">
+    <Project Path="tests/NArchitecture.Starter/presentation/WebApi.Tests/NArchitecture.Starter.WebApi.Tests.csproj" />
+  </Folder>
+</Solution>

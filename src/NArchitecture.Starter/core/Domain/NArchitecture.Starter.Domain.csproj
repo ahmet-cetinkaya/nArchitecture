@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Project Properties -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!-- Project References -->
+  <ItemGroup></ItemGroup>
+  <!-- Package References -->
+  <ItemGroup>
+    <!-- TODO: Pre-release -->
+    <ProjectReference Include="../../../../../narchitecture-core/src/Persistence.Abstractions/NArchitecture.Core.Persistence.Abstractions.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Security.Abstractions/NArchitecture.Core.Security.Abstractions.csproj" />
+    <!--
+    <PackageReference Include="NArchitecture.Core.Persistence" Version="1.1.5" />
+    <PackageReference Include="NArchitecture.Core.Security" Version="1.3.3" />
+    -->
+  </ItemGroup>
+</Project>

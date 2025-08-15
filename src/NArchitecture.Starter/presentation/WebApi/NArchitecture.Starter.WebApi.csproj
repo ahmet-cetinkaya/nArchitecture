@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <!-- Project References -->
+  <ItemGroup>
+    <ProjectReference Include="../../core/Application/NArchitecture.Starter.Application.csproj" />
+    <ProjectReference Include="../../infrastructure/Persistence/NArchitecture.Starter.Persistence.csproj" />
+  </ItemGroup>
+  <!-- Package References -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.6.3" />
+  </ItemGroup>
+</Project>

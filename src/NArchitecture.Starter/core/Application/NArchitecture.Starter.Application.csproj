@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Project Properties -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!-- Project References -->
+  <ItemGroup>
+    <ProjectReference Include="../Domain/NArchitecture.Starter.Domain.csproj" />
+  </ItemGroup>
+  <!-- Package References -->
+  <ItemGroup>
+    <!-- TODO: Pre-release -->
+    <ProjectReference Include="../../../../../narchitecture-core/src/Application/NArchitecture.Core.Application.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Application.DependencyInjection/NArchitecture.Core.Application.DependencyInjection.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Persistence.Abstractions/NArchitecture.Core.Persistence.Abstractions.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Mediator/NArchitecture.Core.Mediator.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Validation.Abstractions/NArchitecture.Core.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Validation.FluentValidation.DependencyInjection/NArchitecture.Core.Validation.FluentValidation.DependencyInjection.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Mapper.Mapster.DependencyInjection/NArchitecture.Core.Mapper.Mapster.DependencyInjection.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Localization.Abstractions/NArchitecture.Core.Localization.Abstractions.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Localization.Resource.Yaml.DependencyInjection/NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection.csproj" />
+    <!--
+    <PackageReference Include="NArchitecture.Core.Application" Version="1.0.6" />
+    <PackageReference Include="NArchitecture.Core.Mailing" Version="1.0.3" />
+    <PackageReference Include="NArchitecture.Core.Mailing.Mailkit" Version="1.0.3" />
+    <PackageReference Include="NArchitecture.Core.CrossCuttingConcerns.Exception" Version="1.0.1" />
+    <PackageReference Include="NArchitecture.Core.CrossCuttingConcerns.Logging.Serilog.File"
+    Version="1.0.3" />
+    <PackageReference Include="NArchitecture.Core.Localization.Abstraction" Version="1.0.1" />
+    <PackageReference Include="NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection"
+    Version="1.0.2" />
+    <PackageReference Include="NArchitecture.Core.ElasticSearch" Version="1.0.1" />
+    <PackageReference Include="NArchitecture.Core.Security.DependencyInjection" Version="1.2.1" />
+    -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+  </ItemGroup>
+  <!-- Resources -->
+  <ItemGroup>
+    <None Update="Features/**/Resources/Locales/*.*.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

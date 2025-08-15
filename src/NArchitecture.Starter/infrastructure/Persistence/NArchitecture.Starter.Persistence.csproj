@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Project Properties -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!-- Project References -->
+  <ItemGroup>
+    <ProjectReference Include="../../core/Application/NArchitecture.Starter.Application.csproj" />
+  </ItemGroup>
+  <!-- Package References -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.7" />
+    <!-- TODO: Pre-release -->
+    <ProjectReference Include="../../../../../narchitecture-core/src/Persistence.Abstractions/NArchitecture.Core.Persistence.Abstractions.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Persistence.EntityFramework/NArchitecture.Core.Persistence.EntityFramework.csproj" />
+    <ProjectReference Include="../../../../../narchitecture-core/src/Persistence.EntityFramework.DependencyInjection/NArchitecture.Core.Persistence.EntityFramework.DependencyInjection.csproj" />
+    <!--
+    <PackageReference Include="NArchitecture.Core.Persistence" Version="1.1.5" />
+    <PackageReference Include="NArchitecture.Core.Persistence.DependencyInjection" Version="1.0.2" />
+    -->
+  </ItemGroup>
+</Project>

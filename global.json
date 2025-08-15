@@ -1,0 +1,20 @@
+{
+  "sdk": {
+    "allowPrerelease": true,
+    "rollForward": "latestMinor",
+    "version": "10.0.100-preview.7.25380.108"
+  },
+  "scripts": {
+    "analyze": "dotnet format analyzers --verify-no-changes --exclude tests/**/**/* && dotnet roslynator analyze --exclude tests/**/**/*",
+    "analyze:fix": "dotnet format analyzers && dotnet roslynator fix --exclude tests/**/**/*",
+    "analyze:security": "dotnet security-scan NArchitecture.Starter.sln",
+    "build": "dotnet build --configuration Release",
+    "clean": "dotnet clean && find . -type d -name bin -exec rm -rf {} + && find . -type d -name obj -exec rm -rf {} + && dotnet restore && dotnet build --configuration Release",
+    "format": "dotnet csharpier format .",
+    "package:update-all": "dotnet outdated -u",
+    "test": "dotnet test --configuration Release",
+    "test:ci:dotnet": "act --container-architecture linux/amd64 -P ubuntu-latest=catthehacker/ubuntu:act-latest -W .github/workflows/dotnet.yml",
+    "tool:update-all": "dotnet tool update --all",
+    "run": "dotnet run --project src/NArchitecture.Starter/presentation/WebApi/NArchitecture.Starter.WebApi.csproj"
+  }
+}
